@@ -1,14 +1,14 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
 import store from './store'
-
-Vue.use(Vuex)
-
 
 require('spark-bootstrap');
 require('./components/bootstrap');
 
+import CreateJob from '@Component/jobs/forms/create'
+Vue.component('create-job', CreateJob)
+
+
 var app = new Vue({
-    store,
-    mixins: [require('spark')]
+    mixins: [require('spark')],
+    store
 });

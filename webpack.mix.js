@@ -31,6 +31,7 @@ mix
             alias: {
                 'vue$': mix.inProduction() ? 'vue/dist/vue.min' : 'vue/dist/vue.js',
                 '@Broadcast' : path.resolve(__dirname, 'resources/assets/js/broadcasters'),
+                '@Component' : path.resolve(__dirname, 'resources/assets/js/components'),
                 '@Watch' : path.resolve(__dirname, 'resources/assets/js/watchers'),
                 '@Trait' : path.resolve(__dirname, 'resources/assets/js/traits')
             }
