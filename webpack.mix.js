@@ -29,7 +29,10 @@ mix
                 'node_modules'
             ],
             alias: {
-                'vue$': mix.inProduction() ? 'vue/dist/vue.min' : 'vue/dist/vue.js'
+                'vue$': mix.inProduction() ? 'vue/dist/vue.min' : 'vue/dist/vue.js',
+                '@Broadcast' : path.resolve(__dirname, 'resources/assets/js/broadcasters'),
+                '@Watch' : path.resolve(__dirname, 'resources/assets/js/watchers'),
+                '@Trait' : path.resolve(__dirname, 'resources/assets/js/traits')
             }
         }
     });
