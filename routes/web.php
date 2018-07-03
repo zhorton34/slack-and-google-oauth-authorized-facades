@@ -10,3 +10,7 @@ Route::put('/jobs/{job}', 'JobController@edit');
 Route::patch('/jobs/{job}', 'JobController@edit');
 Route::get('/jobs/create', 'JobController@create');
 Route::delete('/jobs/{job}', 'JobController@destroy');
+
+Route::get('/test', function() {
+    return ['hello' => 'world', 'zak' => 'horton', 'blake' => 'higgins'];
+});
