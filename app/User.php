@@ -63,17 +63,24 @@ class User extends SparkUser
      */
     public function sheetsAccessToken($provider)
     {
-        return [
-            'access_token'  => $this->accessToken($provider),
-            'refresh_token' => $this->refreshToken($provider),
-            'expires_in'    => 3600,
-            'created'       => $this->updated_at->getTimestamp(),
-        ];
+        return $this->service($provider)->token();
     }
 
     public function addService($provider, $credentials)
     {
         $service = new LoginService;
+
+        /**
+         * ==============================================================================================
+         * TODO: Need to implement logic to check if we want to add a new service or update a service
+         * ==============================================================================================
+         * Currently: We're just deleting all services from same provider before adding a new one
+         * This is incorrect and eventually needs to be corrected
+         */
+        $duplicates = $this->services()->where('provider', $provider);
+        $duplicates->each(function($service) {
+            $service->delete();
+        });
 
         $service->refresh_token = $credentials['refresh_token'];
         $service->access_token = $credentials['access_token'];
@@ -93,19 +100,5 @@ class User extends SparkUser
     public function services()
     {
         return $this->hasMany(LoginService::class);
-    }
-
-    public function accessToken($provider)
-    {
-        return $this->services($provider)
-                    ->where('provider', $this->service)
-                    ->get('access_token');
-    }
-
-    public function refreshToken($provider)
-    {
-        return $this->services($provider)
-                    ->where('provider', $this->service)
-                    ->get('refresh_token');
     }
 }

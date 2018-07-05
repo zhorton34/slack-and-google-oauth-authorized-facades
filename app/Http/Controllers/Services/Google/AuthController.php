@@ -12,7 +12,16 @@ class AuthController extends Controller
 {
     public function toGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        $options =
+        [
+            'access_type' => config('google.access_type'),
+            'approval_prompt' => config('google.approval_prompt')
+        ];
+        
+        return Socialite::driver('google')
+                        ->scopes(config('google.scopes'))
+                        ->with($options)
+                        ->redirect();
     }
     public function fromGoogle(Request $request)
     {
@@ -25,6 +34,6 @@ class AuthController extends Controller
 
         $user->addService('google', $credentials);
 
-        return redirect('/home');
+        return redirect('/sheets');
     }
 }

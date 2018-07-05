@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Google;
 use Sheets;
 use App\User;
+use Socialite;
 use Illuminate\Http\Request;
 
 class SheetController extends Controller
@@ -15,10 +16,14 @@ class SheetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, User $user)
+    public function index(Request $request)
     {
-        $client = Google::getClient();
-        dd($client->authenticate($_GET['code']));
+        $user = auth()->user();
+        $token = $user->service('google')
+                      ->token();
+        $id = '1THKQelQsSt1kFSaKBE5O2-SvsZI4r1qEYE4Bt5iNQ1M';
+
+        return Sheets::setAccessToken($token)->spreadsheet($id)->sheet('Sheet1')->all();
 
     }
 

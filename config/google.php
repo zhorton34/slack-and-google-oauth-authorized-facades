@@ -20,7 +20,7 @@ return [
     'client_id'       => env('GOOGLE_CLIENT_ID', ''),
     'client_secret'   => env('GOOGLE_CLIENT_SECRET', ''),
     'redirect_uri'    => env('GOOGLE_REDIRECT', ''),
-    'scopes'          => [\Google_Service_Sheets::DRIVE_READONLY, \Google_Service_Sheets::SPREADSHEETS_READONLY],
+    'scopes'          => [\Google_Service_Sheets::DRIVE, \Google_Service_Sheets::SPREADSHEETS],
     'access_type'     => env('GOOGLE_ACCESS_TYPE'),
     'approval_prompt' => env('GOOGLE_APPROVAL_PROMPT'),
 
