@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Services\Google;
 
-use Google;
-use Sheets;
-use Socialite;
 use Illuminate\Http\Request;
 use App\Services\Google\Drive;
 use App\Http\Controllers\Controller;
+
 
 class SheetController extends Controller
 {
@@ -18,18 +16,31 @@ class SheetController extends Controller
      */
     public function index(Drive $drive)
     {
-        $list = $drive->spreadSheetList();
-        return view('sheets.sheet', compact('list'));
+
+        $drive->build()->directory('New Zak Test')->create();
+        
+        foreach($drive->search()->all() as $file)
+        {
+
+            if($file->name = 'New Zak Test') dd($file);
+
+        }
+
+        return view('sheets.sheet');
     }
 
+    public function getSheet(Drive $drive)
+    {
+        return Sheets::spreadSheetList();
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Drive $drive)
     {
-        //
+        $drive->spreadSheet()->setTitle(request('name'))->make();
     }
 
     /**

@@ -101,4 +101,9 @@ class User extends SparkUser
     {
         return $this->hasMany(LoginService::class);
     }
+
+    public function accessToken($provider)
+    {
+        return $this->service($provider)->access_token;
+    }
 }

@@ -70236,7 +70236,16 @@ Vue.component('home', {
     props: ['user'],
 
     mounted: function mounted() {
-        //
+        this.get();
+    },
+
+
+    methods: {
+        get: function get() {
+            axios.post('/auth/google/sheets').then(function (response) {
+                console.log(response);
+            });
+        }
     }
 });
 

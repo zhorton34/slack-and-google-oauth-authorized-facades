@@ -3,16 +3,15 @@
 
 @section('content')
 
-
-    @foreach($list as $id => $name)
+    <home :user="user" inline-template>
         <div class="card">
             <div class="card-header">
-                {{ $name }}
             </div>
+
             <div class="card-body">
-                {{ $id }}
+                <button class='btn btn-primary' @click="get">Get Spread Sheets</button>
             </div>
         </div>
-    @endforeach
+    </home>
 
 @endsection

@@ -20,10 +20,12 @@ Route::namespace('Services')->prefix('auth')->middleware('auth')->group(function
         Route::get('go-to', 'AuthController@toGoogle');
         Route::get('from', 'AuthController@fromGoogle');
         Route::get('sheets', 'SheetController@index');
+        Route::post('sheets', 'SheetController@getSheet');
 
     });
 
 });
+
 
 
 
