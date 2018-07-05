@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Services\Google;
 
 use Google;
 use Sheets;
-use App\User;
 use Socialite;
 use Illuminate\Http\Request;
+use App\Services\Google\Drive;
+use App\Http\Controllers\Controller;
 
 class SheetController extends Controller
 {
@@ -15,15 +16,10 @@ class SheetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Drive $drive)
     {
-        $token = auth()->user()->service('google')->token();
-
-        Sheets::setAccessToken($token);
-        $list = Sheets::spreadSheetList();
-
+        $list = $drive->spreadSheetList();
         return view('sheets.sheet', compact('list'));
-
     }
 
     /**

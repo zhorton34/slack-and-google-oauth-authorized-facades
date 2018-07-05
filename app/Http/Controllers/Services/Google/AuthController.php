@@ -34,6 +34,6 @@ class AuthController extends Controller
 
         $user->addService('google', $credentials);
 
-        return redirect('/sheets');
+        return redirect('/auth/google/sheets');
     }
 }

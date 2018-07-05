@@ -12,12 +12,18 @@ Route::get('/jobs/create', 'JobController@create');
 Route::delete('/jobs/{job}', 'JobController@destroy');
 
 
-Route::namespace('Services')->prefix('login-service')->middleware('auth')->group(function ()
+Route::namespace('Services')->prefix('auth')->middleware('auth')->group(function ()
 {
 
-    Route::get('go-to/google', 'Google\AuthController@toGoogle');
-    Route::get('from/google', 'Google\AuthController@fromGoogle');
+    Route::namespace('Google')->prefix('google')->group(function() {
+
+        Route::get('go-to', 'AuthController@toGoogle');
+        Route::get('from', 'AuthController@fromGoogle');
+        Route::get('sheets', 'SheetController@index');
+
+    });
 
 });
 
-Route::get('/sheets', 'SheetController@index');
+
+
