@@ -1,24 +1,18 @@
-@extends('layouts.app')
+@extends('spark::layouts.app')
+
 
 @section('content')
 
-    <table class="table table-striped table-bordered table-hover">
-        <thead>
-        <tr>
-            @foreach($headers as $header)
-                <th>{{ $header }}</th>
-            @endforeach
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($rows as $row)
-            <tr>
-                @foreach($row as $value)
-                    <td>{{ $value }}</td>
-                @endforeach
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+
+    @foreach($list as $id => $name)
+        <div class="card">
+            <div class="card-header">
+                {{ $name }}
+            </div>
+            <div class="card-body">
+                {{ $id }}
+            </div>
+        </div>
+    @endforeach
 
 @endsection

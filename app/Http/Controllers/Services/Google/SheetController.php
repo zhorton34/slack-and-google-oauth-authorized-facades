@@ -18,12 +18,12 @@ class SheetController extends Controller
      */
     public function index(Request $request)
     {
-        $user = auth()->user();
-        $token = $user->service('google')
-                      ->token();
-        $id = '1THKQelQsSt1kFSaKBE5O2-SvsZI4r1qEYE4Bt5iNQ1M';
+        $token = auth()->user()->service('google')->token();
 
-        return Sheets::setAccessToken($token)->spreadsheet($id)->sheet('Sheet1')->all();
+        Sheets::setAccessToken($token);
+        $list = Sheets::spreadSheetList();
+
+        return view('sheets.sheet', compact('list'));
 
     }
 

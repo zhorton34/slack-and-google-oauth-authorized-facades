@@ -17,7 +17,7 @@ class AuthController extends Controller
             'access_type' => config('google.access_type'),
             'approval_prompt' => config('google.approval_prompt')
         ];
-        
+
         return Socialite::driver('google')
                         ->scopes(config('google.scopes'))
                         ->with($options)
