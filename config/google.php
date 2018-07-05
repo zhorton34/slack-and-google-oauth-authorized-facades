@@ -20,9 +20,9 @@ return [
     'client_id'       => env('GOOGLE_CLIENT_ID', ''),
     'client_secret'   => env('GOOGLE_CLIENT_SECRET', ''),
     'redirect_uri'    => env('GOOGLE_REDIRECT', ''),
-    'scopes'          => [],
-    'access_type'     => 'online',
-    'approval_prompt' => 'auto',
+    'scopes'          => [\Google_Service_Sheets::DRIVE_READONLY, \Google_Service_Sheets::SPREADSHEETS_READONLY],
+    'access_type'     => env('GOOGLE_ACCESS_TYPE'),
+    'approval_prompt' => env('GOOGLE_APPROVAL_PROMPT'),
 
     /*
     |----------------------------------------------------------------------------
@@ -62,9 +62,9 @@ return [
     |----------------------------------------------------------------------------
     |
     | Set any additional config variables supported by the Google Client
-    | Details can be found here: 
+    | Details can be found here:
     | https://github.com/google/google-api-php-client/blob/master/src/Google/Client.php
-    | 
+    |
     | NOTE: If client id is specified here, it will get over written by the one above.
     |
     */

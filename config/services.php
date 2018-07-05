@@ -28,7 +28,11 @@ return [
         'secret' => env('SES_SECRET'),
         'region' => 'us-east-1',
     ],
-
+    'google' => [
+        'redirect' => env('GOOGLE_REDIRECT'),
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+    ],
     'braintree' => [
         'model'  => App\User::class,
         'env' => env('BRAINTREE_ENV'),

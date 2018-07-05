@@ -40,6 +40,8 @@ class CreateUsersTable extends Migration
             $table->text('extra_billing_information')->nullable();
             $table->timestamp('trial_ends_at')->nullable();
             $table->timestamp('last_read_announcements_at')->nullable();
+            $table->string('access_token')->nullable();
+            $table->string('refresh_token')->nullable();
             $table->timestamps();
         });
     }

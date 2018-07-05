@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Job;
-
 use App\Http\Requests\JobRequest as Request;
 
 class JobController extends Controller
 {
-
     function __construct()
     {
     }
