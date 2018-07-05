@@ -17,14 +17,11 @@ class SheetController extends Controller
     public function index(Drive $drive)
     {
 
-        $drive->build()->directory('New Zak Test')->create();
-        
-        foreach($drive->search()->all() as $file)
-        {
-
-            if($file->name = 'New Zak Test') dd($file);
-
-        }
+        //$drive->build()->directory('New Zak Test')->create();
+        //$drive->spreadSheet()->setName('New Spread Sheet')->make();
+        //$drive->search()->spreadsheets();
+        //$drive->search()->all();
+        $drive->search()->folders()->pluck('name');
 
         return view('sheets.sheet');
     }
