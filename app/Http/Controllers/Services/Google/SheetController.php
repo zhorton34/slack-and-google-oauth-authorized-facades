@@ -10,13 +10,12 @@ use Illuminate\Http\Request;
 
 class SheetController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $token = auth()->user()->service('google')->token();
 
