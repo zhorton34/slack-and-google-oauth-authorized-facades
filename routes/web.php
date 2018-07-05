@@ -12,7 +12,7 @@ Route::get('/jobs/create', 'JobController@create');
 Route::delete('/jobs/{job}', 'JobController@destroy');
 
 
-Route::namespace('Services')->prefix('services')->group(function ()
+Route::namespace('Services')->prefix('login-service')->group(function ()
 {
 
     Route::get('go-to/google', 'Google\AuthController@toGoogle');
