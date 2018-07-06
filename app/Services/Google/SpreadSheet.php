@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Services\Google;
+<?php namespace App\Services\Google;
 
 use Sheets;
 use Google_Service_Sheets_Spreadsheet as GoogleSpreadSheet;

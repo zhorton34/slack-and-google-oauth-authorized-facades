@@ -1,11 +1,9 @@
-<?php
-
-namespace App\Services\Google;
+<?php namespace App\Services\Google;
 
 use Sheets;
 use Google;
 use App\Services\Google\Search;
-use App\Services\Google\Directory;
+use App\Services\Google\Folder;
 use App\Services\Google\SpreadSheet;
 use Google_Service_Drive as GoogleDrive;
 
@@ -14,7 +12,7 @@ class Drive
 {
 
     private $spreadsheet;
-    private $directory;
+    private $folder;
     private $document;
 
     public function __construct()
@@ -25,36 +23,41 @@ class Drive
         $client = Google::getClient();
         $client->setAccessToken($token);
 
+        $this->folder = new Folder($client);
         $this->document = new Document($client);
-        $this->directory = new Directory($client);
         $this->spreadsheet = new SpreadSheet($token);
 
         $this->search = new Search(new GoogleDrive($client));
 
     }
 
-    public function directory()
+    public function folder()
     {
 
-        return $this->directory;
+        return $this->folder;
 
     }
 
     public function document()
     {
-        return $this->directory();
+
+        return $this->document;
+
     }
+
+    public function spreadsheet()
+    {
+
+        return $this->spreadsheet;
+
+    }
+
 
     public function search()
     {
 
         return $this->search;
 
-    }
-
-    public function spreadsheet()
-    {
-        return $this->spreadsheet;
     }
 
 }

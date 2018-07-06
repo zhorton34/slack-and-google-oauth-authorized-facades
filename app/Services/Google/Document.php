@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Services\Google;
+<?php namespace App\Services\Google;
 
 use Google_Service_Drive_DriveFile as DriveResource;
 use Google_Service_Drive as GoogleDrive;

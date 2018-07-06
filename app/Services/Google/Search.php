@@ -1,12 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: zhort
- * Date: 7/5/18
- * Time: 4:24 AM
- */
-
-namespace App\Services\Google;
+<?php namespace App\Services\Google;
 
 use Sheets;
 

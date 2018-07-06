@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Services\Google;
 use Illuminate\Http\Request;
 use App\Services\Google\Drive;
 use App\Http\Controllers\Controller;
-
+use GoogleDrive;
 
 class SheetController extends Controller
 {
@@ -16,9 +16,17 @@ class SheetController extends Controller
      */
     public function index(Drive $drive)
     {
-        $drive->document()->create('Updated Zak Test');
+        GoogleDrive::search()->folders();
+        GoogleDrive::search()->documents();
+        GoogleDrive::search()->spreadsheets();
+        GoogleDrive::folder()->create('New Folder');
+        GoogleDrive::document()->create('New Document');
+        GoogleDrive::spreadsheet()->create('New Spreadsheet');
+
+
+        /*$drive->document()->create('Updated Zak Test');
         $drive->directory()->create('Updated Zak Test');
-        $drive->spreadsheet()->create('Updated Zak Test');
+        $drive->spreadsheet()->create('Updated Zak Test'); */
 
         //$drive->build()->directory('New Zak Test')->create();
         //$drive->spreadSheet()->setName('New Spread Sheet')->make();
