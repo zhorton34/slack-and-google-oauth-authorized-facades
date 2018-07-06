@@ -16,22 +16,27 @@ class Search
 
     public function folders()
     {
-        $filter = ['q' => "trashed = false AND mimeType='application/vnd.google-apps.folder'"];
+        $filter = ["q" => "trashed = false AND mimeType='application/vnd.google-apps.folder'"];
 
         return collect($this->drive->files->listFiles($filter));
 
     }
-    public function spreadsheets()
+
+    public function documents()
     {
 
-        return collect(Sheets::spreadSheetList());
+        $filter = ["q" => "trashed = false AND mimeType='application/vnd.google-apps.document'"];
 
+        return collect($this->drive->files->listFiles($filter));
+    }
+
+    public function spreadsheets()
+    {
+        return collect(Sheets::spreadSheetList());
     }
 
     public function all()
     {
-
         return collect($this->drive->files->listFiles());
-
     }
 }

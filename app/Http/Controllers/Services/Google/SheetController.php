@@ -14,24 +14,12 @@ class SheetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Drive $drive)
+    public function index()
     {
         GoogleDrive::search()->folders();
         GoogleDrive::search()->documents();
-        GoogleDrive::search()->spreadsheets();
-        GoogleDrive::folder()->create('New Folder');
-        GoogleDrive::document()->create('New Document');
-        GoogleDrive::spreadsheet()->create('New Spreadsheet');
+        dd(GoogleDrive::search()->spreadsheets());
 
-
-        /*$drive->document()->create('Updated Zak Test');
-        $drive->directory()->create('Updated Zak Test');
-        $drive->spreadsheet()->create('Updated Zak Test'); */
-
-        //$drive->build()->directory('New Zak Test')->create();
-        //$drive->spreadSheet()->setName('New Spread Sheet')->make();
-        //$drive->search()->spreadsheets();
-        //$drive->search()->all();
 
         return view('sheets.sheet');
     }

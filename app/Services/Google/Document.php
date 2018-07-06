@@ -17,7 +17,7 @@ class Document
 
     public function create($name)
     {
-        $options = ['name' => $name, 'mimeType' => 'application/vnd.google-apps.folder'];
+        $options = ['name' => $name, 'mimeType' => 'application/vnd.google-apps.document'];
         $this->meta = new DriveResource($options);
 
         $this->document = new DriveResource($this->service->files->create($this->meta, ['fields' => 'id']));
