@@ -15,20 +15,7 @@ class SheetController extends Controller
      */
     public function index()
     {
-        $file = GoogleDrive::search()->documents()->where('name', 'Refactor Doc')->first();
 
-        $folder = GoogleDrive::search()->folders()->where('name', 'CCCL TEST')->first();
-
-        GoogleDrive::move()->resource($file)->to($folder);
-
-        /*$folders = GoogleDrive::search()->folders();
-
-        $folder = $folders->where('name', 'CCCL TEST')->first();
-
-        GoogleDrive::document()->create('New Document')->parent($folder);
-
-        return view('sheets.sheet');
-        */
     }
 
     /**

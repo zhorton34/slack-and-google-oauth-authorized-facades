@@ -1,19 +1,7 @@
 <?php namespace App\Services\Google;
 
-use Google_Service_Drive as GoogleDrive;
-
-
-class Search
+class Search extends GoogleAction
 {
-
-    private $drive;
-
-    public function __construct($client)
-    {
-
-        $this->drive = new GoogleDrive($client);
-
-    }
 
     public function folders()
     {

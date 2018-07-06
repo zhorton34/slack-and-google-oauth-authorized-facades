@@ -1,19 +1,12 @@
 <?php namespace App\Services\Google;
 
 use Google_Service_Drive_DriveFile as DriveResource;
-use Google_Service_Drive as GoogleDrive;
-use Google;
 
-class Move
+
+class Move extends GoogleAction
 {
-    private $drive;
+
     private $resource;
-
-    public function __construct($client)
-    {
-        $this->drive = new GoogleDrive($client);
-    }
-
 
     public function resource($resource)
     {
