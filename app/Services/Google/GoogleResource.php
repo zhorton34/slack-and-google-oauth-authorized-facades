@@ -17,6 +17,21 @@ class GoogleResource
         $this->setType();
     }
 
+    public function get($resource)
+    {
+        return $this->drive->files->get($resource->id);
+    }
+
+    public function copy($resource, $name)
+    {
+        $copy = new DriveResource();
+        $copy->setName($name);
+
+        $this->files()->copy($resource->id, $copy);
+
+        return $this;
+    }
+
     public function create($name)
     {
         $type = 'application/vnd.google-apps.' . $this->type;
