@@ -1,35 +1,31 @@
 <?php namespace App\Services\Google;
 
-use Sheets;
-use Google_Service_Sheets_Spreadsheet as GoogleSpreadSheet;
-use Google_Service_Sheets_SpreadsheetProperties as SpreadSheetProperties;
+use Google_Service_Drive_DriveFile as DriveResource;
+use Google_Service_Drive as GoogleDrive;
+use Google;
 
 class SpreadSheet
 {
-
-    private $props;
-    private $service;
+    private $meta;
+    private $drive;
     private $spreadsheet;
 
-    public function __construct($token)
+    public function __construct($client)
     {
-        Sheets::setAccessToken($token);
-        $this->service = Sheets::getService()->spreadsheets;
-        $this->spreadsheet = new GoogleSpreadSheet();
-        $this->props = new SpreadSheetProperties;
+        $this->drive = new GoogleDrive($client);
     }
-
 
     public function create($name)
     {
-        $this->props->setTitle($name);
-        $this->setProperties()->service->create($this->spreadsheet);
-    }
+        $options = ['name' => $name, 'mimeType' => 'application/vnd.google-apps.spreadsheet'];
+        $this->meta = new DriveResource($options);
 
-    public function setProperties()
-    {
-        $this->spreadsheet->setProperties($this->props);
+        $this->spreadsheet = new DriveResource($this->drive->files->create($this->meta, ['fields' => 'id']));
         return $this;
     }
 
+    public function get()
+    {
+        return $this->spreadsheet;
+    }
 }

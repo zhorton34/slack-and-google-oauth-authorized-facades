@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Services\Google;
 
-use Illuminate\Http\Request;
-use App\Services\Google\Drive;
-use App\Http\Controllers\Controller;
 use GoogleDrive;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SheetController extends Controller
 {
@@ -16,26 +15,30 @@ class SheetController extends Controller
      */
     public function index()
     {
-        GoogleDrive::search()->folders();
-        GoogleDrive::search()->documents();
-        dd(GoogleDrive::search()->spreadsheets());
+        $file = GoogleDrive::search()->documents()->where('name', 'Refactor Doc')->first();
 
+        $folder = GoogleDrive::search()->folders()->where('name', 'CCCL TEST')->first();
+
+        GoogleDrive::move()->resource($file)->to($folder);
+
+        /*$folders = GoogleDrive::search()->folders();
+
+        $folder = $folders->where('name', 'CCCL TEST')->first();
+
+        GoogleDrive::document()->create('New Document')->parent($folder);
 
         return view('sheets.sheet');
+        */
     }
 
-    public function getSheet(Drive $drive)
-    {
-        return Sheets::spreadSheetList();
-    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Drive $drive)
+    public function create()
     {
-        $drive->spreadSheet()->setTitle(request('name'))->make();
+        GoogleDrive::spreadsheet()->create(request('name'));
     }
 
     /**

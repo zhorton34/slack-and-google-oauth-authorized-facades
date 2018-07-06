@@ -7,12 +7,12 @@ use Google;
 class Document
 {
     private $meta;
-    private $service;
+    private $drive;
     private $document;
 
     public function __construct($client)
     {
-        $this->service = new GoogleDrive($client);
+        $this->drive = new GoogleDrive($client);
     }
 
     public function create($name)
@@ -20,9 +20,10 @@ class Document
         $options = ['name' => $name, 'mimeType' => 'application/vnd.google-apps.document'];
         $this->meta = new DriveResource($options);
 
-        $this->document = new DriveResource($this->service->files->create($this->meta, ['fields' => 'id']));
+        $this->document = new DriveResource($this->drive->files->create($this->meta, ['fields' => 'id']));
         return $this;
     }
+
 
     public function get()
     {

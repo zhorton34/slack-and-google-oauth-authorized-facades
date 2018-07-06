@@ -1,33 +1,38 @@
 <?php namespace App\Services\Google;
 
-use Sheets;
 use Google;
-use App\Services\Google\Search;
-use App\Services\Google\Folder;
-use App\Services\Google\SpreadSheet;
+use App\Services\Google\Move as Move;
 use Google_Service_Drive as GoogleDrive;
+use App\Services\Google\Search as Search;
+use App\Services\Google\Folder as Folder;
+use App\Services\Google\SpreadSheet as SpreadSheet;
 
 
 class Drive
 {
 
-    private $spreadsheet;
-    private $folder;
-    private $document;
+    protected $client;
+
+    protected $move;
+    protected $search;
+
+    protected $folder;
+    protected $document;
+    protected $spreadsheet;
+
+    protected $resources = [
+        'spreadsheet' => 'SpreadSheet', 'document' => 'Document', 'folder' => 'Folder',
+    ];
+
+    protected $actions = [
+        'search' => 'Search', 'move' => 'Move',
+    ];
 
     public function __construct()
     {
-
-        $token = auth()->user()->service('google')->token();
-
-        $client = Google::getClient();
-        $client->setAccessToken($token);
-
-        $this->folder = new Folder($client);
-        $this->document = new Document($client);
-        $this->spreadsheet = new SpreadSheet($token);
-
-        $this->search = new Search(new GoogleDrive($client));
+        $this->setClient()
+             ->register('actions')
+             ->register('resources');
 
     }
 
@@ -60,4 +65,34 @@ class Drive
 
     }
 
+    public function move()
+    {
+
+        return $this->move;
+
+    }
+
+    protected function setClient()
+    {
+        $this->client = Google::getClient();
+        $token = auth()->user()->service('google')->token();
+
+        $this->client->setAccessToken($token);
+
+        return $this;
+    }
+
+
+    public function register($array)
+    {
+        $path = 'App\Services\Google\\';
+
+        foreach($this->$array as $prop => $className)
+        {
+            $class = $path . $className;
+            $this->$prop = new $class($this->client);
+        }
+
+        return $this;
+    }
 }

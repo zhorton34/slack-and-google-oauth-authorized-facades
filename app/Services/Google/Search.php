@@ -1,16 +1,17 @@
 <?php namespace App\Services\Google;
 
-use Sheets;
+use Google_Service_Drive as GoogleDrive;
+
 
 class Search
 {
 
     private $drive;
 
-    public function __construct($drive)
+    public function __construct($client)
     {
 
-        $this->drive = $drive;
+        $this->drive = new GoogleDrive($client);
 
     }
 
@@ -32,7 +33,9 @@ class Search
 
     public function spreadsheets()
     {
-        return collect(Sheets::spreadSheetList());
+        $filter = ['q' => "trashed = false AND mimeType='application/vnd.google-apps.spreadsheet'"];
+
+        return collect($this->drive->files->listFiles($filter));
     }
 
     public function all()

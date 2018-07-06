@@ -7,12 +7,12 @@ use Google;
 class Folder
 {
     private $meta;
+    private $drive;
     private $folder;
-    private $service;
 
     public function __construct($client)
     {
-        $this->service = new GoogleDrive($client);
+        $this->drive = new GoogleDrive($client);
     }
 
     public function create($name)
@@ -20,7 +20,7 @@ class Folder
         $options = ['name' => $name, 'mimeType' => 'application/vnd.google-apps.folder'];
         $this->meta = new DriveResource($options);
 
-        $this->folder = new DriveResource($this->service->files->create($this->meta, ['fields' => 'id']));
+        $this->folder = new DriveResource($this->drive->files->create($this->meta, ['fields' => 'id']));
         return $this;
     }
 
