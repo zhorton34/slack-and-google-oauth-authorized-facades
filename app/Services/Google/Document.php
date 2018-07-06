@@ -6,11 +6,11 @@ use Google_Service_Drive_DriveFile as DriveResource;
 use Google_Service_Drive as GoogleDrive;
 use Google;
 
-class Directory
+class Document
 {
     private $meta;
     private $service;
-    private $directory;
+    private $document;
 
     public function __construct($client)
     {
@@ -22,12 +22,12 @@ class Directory
         $options = ['name' => $name, 'mimeType' => 'application/vnd.google-apps.folder'];
         $this->meta = new DriveResource($options);
 
-        $this->directory = new DriveResource($this->service->files->create($this->meta, ['fields' => 'id']));
+        $this->document = new DriveResource($this->service->files->create($this->meta, ['fields' => 'id']));
         return $this;
     }
 
     public function get()
     {
-        return $this->directory;
+        return $this->document;
     }
 }

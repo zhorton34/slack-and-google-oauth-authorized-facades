@@ -9,35 +9,29 @@ use Google_Service_Sheets_SpreadsheetProperties as SpreadSheetProperties;
 class SpreadSheet
 {
 
-    private $list;
     private $props;
     private $service;
     private $spreadsheet;
 
-    public function __construct()
+    public function __construct($token)
     {
+        Sheets::setAccessToken($token);
         $this->service = Sheets::getService()->spreadsheets;
         $this->spreadsheet = new GoogleSpreadSheet();
         $this->props = new SpreadSheetProperties;
     }
 
 
-    public function make()
+    public function create($name)
     {
-        $this->service->create($this->spreadsheet);
+        $this->props->setTitle($name);
+        $this->setProperties()->service->create($this->spreadsheet);
     }
 
-    public function setTitle($title)
-    {
-        $this->props->setTitle($title);
-        $this->setProps();
-        return $this;
-    }
-
-    public function setProps()
+    public function setProperties()
     {
         $this->spreadsheet->setProperties($this->props);
-        return $this->spreadsheet;
+        return $this;
     }
 
 }

@@ -13,32 +13,36 @@ use Google_Service_Drive as GoogleDrive;
 class Drive
 {
 
-    private $googleDrive;
-    private $spreadSheet;
-    private $builder;
+    private $spreadsheet;
+    private $directory;
+    private $document;
 
     public function __construct()
     {
 
         $token = auth()->user()->service('google')->token();
-        Sheets::setAccessToken($token);
 
         $client = Google::getClient();
         $client->setAccessToken($token);
 
-        $this->builder = new Directory($client);
-        $this->spreadSheet = new SpreadSheet();
-        $this->googleDrive = new GoogleDrive($client);
+        $this->document = new Document($client);
+        $this->directory = new Directory($client);
+        $this->spreadsheet = new SpreadSheet($token);
 
-        $this->search = new Search($this->googleDrive);
+        $this->search = new Search(new GoogleDrive($client));
 
     }
 
-    public function build()
+    public function directory()
     {
 
-        return $this->builder;
+        return $this->directory;
 
+    }
+
+    public function document()
+    {
+        return $this->directory();
     }
 
     public function search()
@@ -48,9 +52,9 @@ class Drive
 
     }
 
-    public function spreadSheet()
+    public function spreadsheet()
     {
-        return $this->spreadSheet;
+        return $this->spreadsheet;
     }
 
 }
