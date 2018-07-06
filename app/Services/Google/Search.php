@@ -3,25 +3,12 @@
 class Search extends GoogleAction
 {
 
-    public function folders()
+    protected $filters = ['folder', 'document', 'spreadsheet', 'script'];
+
+
+    protected function find($resource)
     {
-        $filter = ["q" => "trashed = false AND mimeType='application/vnd.google-apps.folder'"];
-
-        return collect($this->drive->files->listFiles($filter));
-
-    }
-
-    public function documents()
-    {
-
-        $filter = ["q" => "trashed = false AND mimeType='application/vnd.google-apps.document'"];
-
-        return collect($this->drive->files->listFiles($filter));
-    }
-
-    public function spreadsheets()
-    {
-        $filter = ['q' => "trashed = false AND mimeType='application/vnd.google-apps.spreadsheet'"];
+        $filter = ["q" => "trashed = false AND mimeType='application/vnd.google-apps.{$resource}'"];
 
         return collect($this->drive->files->listFiles($filter));
     }
@@ -29,5 +16,26 @@ class Search extends GoogleAction
     public function all()
     {
         return collect($this->drive->files->listFiles());
+    }
+
+
+    public function __call($resource, $options)
+    {
+        $resource = $this->checkForResource($resource);
+
+        if(!$resource) return 'Can not search for resource that does not exist';
+
+        return $this->find($resource);
+
+    }
+
+    protected function checkForResource($resource)
+    {
+        $resource = rtrim($resource, 's');
+
+        if(in_array($resource, $this->filters)) return $resource;
+
+        return false;
+
     }
 }
