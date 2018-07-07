@@ -158,15 +158,25 @@ return [
         Laravel\Cashier\CashierServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
+
+        /*
+         * Clean Code Clean Life Service Providers
+         */
         App\Providers\GoogleServiceProvider::class,
+        App\Providers\SlackServiceProvider::class,
+
 
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        /*
+         * 3rd Party Service Providers
+         */
         PulkitJalan\Google\GoogleServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
-        App\Providers\SlackServiceProvider::class,
+
     ],
 
     /*
@@ -219,6 +229,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'GoogleDrive' => App\Services\Facades\GoogleDrive::class,
         'Slack' => App\Services\Facades\Slack::class,
+
     ],
 
 ];

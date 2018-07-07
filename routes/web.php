@@ -31,6 +31,9 @@ Route::namespace('Services')->prefix('auth')->middleware('auth')->group(function
     });
 });
 
+Route::get('user', function() {
+    return auth()->user();
+});
 
 
 

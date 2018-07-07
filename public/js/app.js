@@ -70230,23 +70230,58 @@ __webpack_require__("./resources/assets/js/components/home.js");
 /***/ }),
 
 /***/ "./resources/assets/js/components/home.js":
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
 
 Vue.component('home', {
+
+    components: { mapState: __WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapState */], mapActions: __WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */] },
+
     props: ['user'],
 
     mounted: function mounted() {
+        this.setUser();
         this.get();
+
+        this.createChannel();
     },
 
 
-    methods: {
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapState */])(['authUser']), {
+        endpoint: function endpoint() {
+            return 'https://slack.com/api/channels.create';
+        }
+    }),
+
+    methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])(['setUser']), {
+        createChannel: function createChannel() {
+            //
+            // var instance = axios.create();
+            // delete instance.defaults.headers.common['X-CSRF-TOKEN']
+            // delete instance.defaults.headers.common['X-Requested-With']
+            //
+            // setTimeout(() => {
+            //     axios.get(this.endpoint, {
+            //         params: {
+            //             token: this.authUser.services[1].access_token,
+            //             name: 'newzakslackchannel-dev'
+            //         },
+            //         headers: {}
+            //     }).then(response => {console.log('response: ', response)})
+            // }, 1000)
+        },
         get: function get() {
             axios.post('/auth/google/sheets').then(function (response) {
                 console.log(response);
             });
         }
-    }
+    })
 });
 
 /***/ }),
@@ -70933,7 +70968,17 @@ Vue.component('spark-update-team-photo', {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({});
+/* harmony default export */ __webpack_exports__["a"] = ({
+    setUser: function setUser(_ref) {
+        var commit = _ref.commit;
+
+        axios.get('/user').then(function (_ref2) {
+            var data = _ref2.data;
+
+            commit('setUser', data);
+        });
+    }
+});
 
 /***/ }),
 
@@ -70980,7 +71025,11 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({});
+/* harmony default export */ __webpack_exports__["a"] = ({
+    setUser: function setUser(state, user) {
+        state.authUser = user;
+    }
+});
 
 /***/ }),
 
@@ -70988,7 +71037,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({});
+/* harmony default export */ __webpack_exports__["a"] = ({
+    authUser: {}
+});
 
 /***/ }),
 

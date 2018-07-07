@@ -2,34 +2,24 @@
 
 namespace App\Http\Controllers\Services\Slack;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Socialite;
 
+use App\Http\Controllers\Controller;
+use Socialite;
+use Slack;
 
 class AuthController extends Controller
 {
     public function toSlack()
     {
         return Socialite::driver('slack')
-                        ->scopes(['admin', 'channels:write'])
+                        ->with(config('slack.credentials'))
+                        ->scopes(config('slack.scopes'))
                         ->redirect();
+
     }
-    public function fromSlack(Request $request)
+    public function fromSlack()
     {
-        $slackAccount = Socialite::driver('slack');
-        dd($slackAccount->user());
-
-        $code = $request->input('code');
-
-        dd($request->input('code'));
-        $user = $request->user();
-
-        $credentials['access_token'] = $slackAccount ->token;
-        $credentials['expires_in'] = $slackAccount->expiresIn;
-        $credentials['refresh_token'] = $slackAccount ->refreshToken;
-
-        $user->addService('slack', $credentials);
+        Slack::authorizeUser();
 
         return redirect('/auth/slack/channels');
     }

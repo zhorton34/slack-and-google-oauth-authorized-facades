@@ -22,4 +22,14 @@ class LoginService extends Model
             'created' => $this->updated_at->getTimestamp(),
         ];
     }
+
+    public function getAccessToken()
+    {
+        return $this->access_token;
+    }
+
+    public function getRefreshToken()
+    {
+        return $this->refresh_token;
+    }
 }

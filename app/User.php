@@ -14,6 +14,7 @@ class User extends SparkUser
 
     use CanJoinTeams;
 
+    protected $with = ['services'];
     /**
      * The attributes that are mass assignable.
      *
@@ -78,9 +79,8 @@ class User extends SparkUser
          * This is incorrect and eventually needs to be corrected
          */
         $duplicates = $this->services()->where('provider', $provider);
-        $duplicates->each(function($service) {
-            $service->delete();
-        });
+
+        $duplicates->each(function($service) { $service->delete(); });
 
         $service->refresh_token = $credentials['refresh_token'];
         $service->access_token = $credentials['access_token'];
