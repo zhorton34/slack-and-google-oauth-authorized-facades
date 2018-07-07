@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Services\Google;
+namespace App\Http\Controllers;
 
-use GoogleDrive;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class SheetController extends Controller
+class ChannelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +13,7 @@ class SheetController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -25,7 +23,7 @@ class SheetController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**

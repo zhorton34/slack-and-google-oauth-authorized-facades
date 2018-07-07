@@ -20,10 +20,15 @@ Route::namespace('Services')->prefix('auth')->middleware('auth')->group(function
         Route::get('go-to', 'AuthController@toGoogle');
         Route::get('from', 'AuthController@fromGoogle');
         Route::get('sheets', 'SheetController@index');
-        Route::post('sheets', 'SheetController@getSheet');
 
     });
 
+    Route::namespace('Slack')->prefix('slack')->group(function() {
+
+        Route::get('go-to', 'AuthController@toSlack');
+        Route::get('from', 'AuthController@fromSlack');
+        Route::get('channels', 'ChannelController@index');
+    });
 });
 
 

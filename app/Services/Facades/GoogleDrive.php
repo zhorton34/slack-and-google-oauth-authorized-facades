@@ -1,8 +1,8 @@
-<?php namespace App\Services\Google\Facades;
+<?php namespace App\Services\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Drive extends Facade
+class GoogleDrive extends Facade
 {
     public static function getFacadeAccessor()
     {

@@ -1,8 +1,10 @@
-<?php namespace App\Providers;
+<?php
+
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class GoogleServiceProvider extends ServiceProvider
+class SlackServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
@@ -21,6 +23,6 @@ class GoogleServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('GoogleDrive', 'App\Services\Google\GoogleDrive');
+        $this->app->bind('Slack', 'App\Services\Slack\Slack');
     }
 }

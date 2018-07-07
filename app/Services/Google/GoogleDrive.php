@@ -1,12 +1,9 @@
 <?php namespace App\Services\Google;
 
+use App\Services\Google\GoogleDriveManager;
 
-use App\Services\Google\GoogleServiceManager;
-
-class Drive extends GoogleServiceManager
+class GoogleDrive extends GoogleDriveManager
 {
-
-    protected $client;
 
     protected $script;
     protected $folder;

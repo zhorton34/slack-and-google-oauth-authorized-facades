@@ -165,7 +165,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         PulkitJalan\Google\GoogleServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-
+        SocialiteProviders\Manager\ServiceProvider::class,
+        App\Providers\SlackServiceProvider::class,
     ],
 
     /*
@@ -216,7 +217,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Google' => PulkitJalan\Google\Facades\Google::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'GoogleDrive' => App\Services\Google\Facades\Drive::class,
+        'GoogleDrive' => App\Services\Facades\GoogleDrive::class,
+        'Slack' => App\Services\Facades\Slack::class,
     ],
 
 ];

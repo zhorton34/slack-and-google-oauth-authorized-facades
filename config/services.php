@@ -28,11 +28,13 @@ return [
         'secret' => env('SES_SECRET'),
         'region' => 'us-east-1',
     ],
+
     'google' => [
         'redirect' => env('GOOGLE_REDIRECT'),
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
     ],
+
     'braintree' => [
         'model'  => App\User::class,
         'env' => env('BRAINTREE_ENV'),
@@ -40,5 +42,12 @@ return [
         'key' => env('BRAINTREE_PUBLIC_KEY'),
         'secret' => env('BRAINTREE_PRIVATE_KEY'),
     ],
+
+    'slack' => [
+        'client_id' => env('SLACK_CLIENT_ID'),
+        'client_secret' => env('SLACK_SECRET'),
+        'redirect' => env('SLACK_REDIRECT_URI'),
+    ],
+
 
 ];

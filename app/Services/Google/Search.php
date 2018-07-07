@@ -36,8 +36,6 @@ class Search extends GoogleAction
     }
 
 
-
-
     protected function checkForResource($resource)
     {
         $resource = rtrim($resource, 's');

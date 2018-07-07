@@ -1,15 +1,12 @@
 <?php namespace App\Services\Google;
 
 use Google;
-use App\Services\Google\Move;
-use App\Services\Google\Script;
-use App\Services\Google\Search;
-use App\Services\Google\Folder;
-use App\Services\Google\SpreadSheet;
-use Google_Service_Drive as GoogleDrive;
 
-class GoogleServiceManager
+class GoogleDriveManager
 {
+
+    protected $client;
+
     public function __construct()
     {
         $this->setClient()
