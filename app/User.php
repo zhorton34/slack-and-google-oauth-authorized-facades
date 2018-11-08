@@ -31,19 +31,19 @@ class User extends SparkUser
      * @var array
      */
     protected $hidden = [
-        'password',
-        'remember_token',
-        'authy_id',
-        'country_code',
         'phone',
+        'authy_id',
+        'password',
         'card_brand',
-        'card_last_four',
-        'card_country',
-        'billing_address',
-        'billing_address_line_2',
-        'billing_city',
         'billing_zip',
+        'card_country',
+        'billing_city',
+        'country_code',
+        'remember_token',
+        'card_last_four',
+        'billing_address',
         'billing_country',
+        'billing_address_line_2',
         'extra_billing_information',
     ];
 
@@ -80,7 +80,12 @@ class User extends SparkUser
          */
         $duplicates = $this->services()->where('provider', $provider);
 
-        $duplicates->each(function($service) { $service->delete(); });
+        $duplicates->each(function($service) 
+        { 
+        
+            $service->delete(); 
+        
+        });
 
         $service->refresh_token = $credentials['refresh_token'];
         $service->access_token = $credentials['access_token'];
